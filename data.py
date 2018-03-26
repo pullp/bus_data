@@ -55,7 +55,7 @@ for i, row in v2.iterrows():
             print("check error\n")
             break;
         times = [1, 2]
-    buf += (str(i[3])+","+str(row['stop_lat'])+"," +str(row['stop_lon']) + "," + str(i[2]) + '\n')
+    buf += (str(i[3]).replace(',', ' ')+","+str(row['stop_lat'])+"," +str(row['stop_lon']) + "," + str(i[2]) + '\n')
     stop_count += 1
     
 f.close()
