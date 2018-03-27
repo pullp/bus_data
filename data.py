@@ -21,15 +21,15 @@ final = pandas.merge(route_trip_stop_time, stop_position_name, on = "stop_id")
 base_time = datetime.datetime(1900, 1, 1)
 
 
-final['arrival_time'] = final['arrival_time'].apply(lambda time: (datetime.datetime(1900, 1, 1, int(time[:2])%24, int(time[3:5]), int(time[6:])) - base_time).total_seconds())
-
+final['arrival_time'] = final['arrival_time'].apply(lambda time: (datetime.datetime(1900, 1, 1+int(int(time[:2])/24), int(time[:2])%24, int(time[3:5]), int(time[6:])) - base_time).total_seconds())
+#datetime.datetime(0, 0, int(time[:2])/24, int(time[:2])%24, int(time[3:5]), int(time[6:]))
 v2 = pandas.pivot_table(final, values = [ "stop_lon", "stop_id",  "stop_lat" ], index =["trip_id", "route_id",  "arrival_time", "stop_name"])
-test = v2[0:100]
+
 
 current_trip_id=''
 current_route_id = ''
 
-f = open('out.csv', 'w')
+
 buf = ""
 stop_count = 0
 times = [1, 2]
@@ -39,7 +39,9 @@ def check(times):
         if(time<current_time):
             return 0
     return 1
-
+f = open('out.csv', 'w')
+#f = open(r'E:\OneDrive - stu.hit.edu.cn\codes\software_construction\Lab2-1160501022\test.csv', 'w')
+test = v2[0:200]
 for i, row in v2.iterrows():
     if(current_trip_id != i[0]) :
         f.write(current_route_id + "," + str(stop_count))
