@@ -41,6 +41,7 @@ def check(times):
     return 1
 f = open('out.csv', 'w')
 #f = open(r'E:\OneDrive - stu.hit.edu.cn\codes\software_construction\Lab2-1160501022\test.csv', 'w')
+#f = open(r'E:\OneDrive - stu.hit.edu.cn\codes\software_construction\Lab2-1160501022\out.csv', 'w')
 test = v2[0:200]
 for i, row in v2.iterrows():
     if(current_trip_id != i[0]) :
@@ -57,7 +58,7 @@ for i, row in v2.iterrows():
             print("check error\n")
             break;
         times = [1, 2]
-    buf += (str(i[3]).replace(',', ' ')+","+str(row['stop_lat'])+"," +str(row['stop_lon']) + "," + str(i[2]) + '\n')
+    buf += (str(i[3]).replace(',', ' ')+","+str(row['stop_lat'])+"," +str(row['stop_lon']) + "," + str(int(i[2])) + '\n')
     stop_count += 1
     
 f.close()
